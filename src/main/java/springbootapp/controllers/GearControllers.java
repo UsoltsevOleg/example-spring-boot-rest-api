@@ -31,7 +31,12 @@ public class GearControllers {
 
     @RequestMapping(value = "/api/gear/update/{id}", method = RequestMethod.POST)
     public ResponseEntity<?> updateGear(@RequestBody Gear gear) {
-        return new ResponseEntity<>(gearService.update(gear), HttpStatus.UPGRADE_REQUIRED);
+        try {
+            return new ResponseEntity<>(gearService.update(gear), HttpStatus.UPGRADE_REQUIRED);
+        } catch (Exception e) {
+            System.out.println("id не найден");
+            return null;
+        }
     }
 
     @RequestMapping(value = "/api/gear/delete/{id}", method = RequestMethod.POST)

@@ -31,7 +31,12 @@ public class EngineController {
 
     @RequestMapping(value = "/api/engine/update/{id}", method = RequestMethod.POST)
     public ResponseEntity<?> updateEngine(@RequestBody Engine engine) {
-        return new ResponseEntity<>(engineService.update(engine), HttpStatus.UPGRADE_REQUIRED);
+        try {
+            return new ResponseEntity<>(engineService.update(engine), HttpStatus.UPGRADE_REQUIRED);
+        } catch (Exception e) {
+            System.out.println("id не найден");
+            return null;
+        }
     }
 
     @RequestMapping(value = "/api/engine/delete/{id}", method = RequestMethod.POST)

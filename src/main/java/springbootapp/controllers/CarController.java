@@ -31,7 +31,12 @@ public class CarController {
 
     @RequestMapping(value = "/api/car/update/{id}", method = RequestMethod.POST)
     public ResponseEntity<?> updateCar(@RequestBody Car car) {
-        return new ResponseEntity<>(carService.update(car), HttpStatus.UPGRADE_REQUIRED);
+        try {
+            return new ResponseEntity<>(carService.update(car), HttpStatus.UPGRADE_REQUIRED);
+        } catch (Exception e) {
+            System.out.println("id не найден");
+            return null;
+        }
     }
 
     @RequestMapping(value = "/api/car/delete/{id}", method = RequestMethod.POST)

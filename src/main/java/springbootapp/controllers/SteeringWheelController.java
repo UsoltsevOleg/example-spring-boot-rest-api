@@ -32,7 +32,12 @@ public class SteeringWheelController {
 
     @RequestMapping(value = "/api/steeringWheel/update/{id}", method = RequestMethod.POST)
     public ResponseEntity<?> updateSteeringWheelService(@RequestBody SteeringWheelService steeringWheel) {
-        return new ResponseEntity<>(steeringWheelService.update(steeringWheel), HttpStatus.UPGRADE_REQUIRED);
+        try {
+            return new ResponseEntity<>(steeringWheelService.update(steeringWheel), HttpStatus.UPGRADE_REQUIRED);
+        } catch (Exception e) {
+            System.out.println("id не найден");
+            return null;
+        }
     }
 
     @RequestMapping(value = "/api/steeringWheel/delete/{id}", method = RequestMethod.POST)

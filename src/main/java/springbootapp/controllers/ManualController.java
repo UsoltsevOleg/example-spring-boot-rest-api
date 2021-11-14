@@ -31,7 +31,12 @@ public class ManualController {
 
     @RequestMapping(value = "/api/manual/update/{id}", method = RequestMethod.POST)
     public ResponseEntity<?> updateManual(@RequestBody Manual manual) {
-        return new ResponseEntity<>(manualService.update(manual), HttpStatus.UPGRADE_REQUIRED);
+        try {
+            return new ResponseEntity<>(manualService.update(manual), HttpStatus.UPGRADE_REQUIRED);
+        } catch (Exception e) {
+            System.out.println("id не найден");
+            return null;
+        }
     }
 
     @RequestMapping(value = "/api/manual/delete/{id}", method = RequestMethod.POST)
