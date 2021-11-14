@@ -1,14 +1,11 @@
 package springbootapp.controllers;
 
-import com.example.boot.starter.services.SomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springbootapp.entities.Car;
 import springbootapp.entities.Engine;
 import springbootapp.repositories.EngineRepository;
-import springbootapp.service.serviceimpl.CarServiceImpl;
 import springbootapp.service.serviceimpl.EngineServiceImpl;
 
 import java.util.Optional;
@@ -39,9 +36,14 @@ public class EngineController {
 
     @RequestMapping(value = "/api/engine/delete/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteEngine(@PathVariable long id) {
-        Optional<Engine> engine = engineService.getByID(id);
-        engineService.remove(id);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        try {
+            Optional<Engine> engine = engineService.getByID(id);
+            engineService.remove(id);
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println("id не найден");
+            return null;
+        }
     }
 
     @RequestMapping(value = "/api/engine/create", method = RequestMethod.POST)

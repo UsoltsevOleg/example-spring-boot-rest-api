@@ -1,15 +1,11 @@
 package springbootapp.controllers;
 
-import com.example.boot.starter.services.SomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springbootapp.entities.Car;
 import springbootapp.entities.Gear;
 import springbootapp.repositories.GearRepository;
-import springbootapp.service.GearService;
-import springbootapp.service.serviceimpl.CarServiceImpl;
 import springbootapp.service.serviceimpl.GearServiceImpl;
 
 import java.util.Optional;
@@ -40,9 +36,14 @@ public class GearControllers {
 
     @RequestMapping(value = "/api/gear/delete/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteGear(@PathVariable long id) {
-        Optional<Gear> gear = gearService.getByID(id);
-        gearService.remove(id);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        try {
+            Optional<Gear> gear = gearService.getByID(id);
+            gearService.remove(id);
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println("id не найден");
+            return null;
+        }
     }
 
     @RequestMapping(value = "/api/gear/create", method = RequestMethod.POST)

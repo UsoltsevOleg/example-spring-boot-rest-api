@@ -37,9 +37,14 @@ public class SteeringWheelController {
 
     @RequestMapping(value = "/api/steeringWheel/delete/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteSteeringWheelService(@PathVariable long id) {
-        Optional<SteeringWheelService> steeringWheel = steeringWheelRepository.getByID(id);
-        steeringWheelService.remove(id);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        try {
+            Optional<SteeringWheel> steeringWheel = steeringWheelService.getByID(id);
+            steeringWheelService.remove(id);
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println("id не найден");
+            return null;
+        }
     }
 
     @RequestMapping(value = "/api/steeringWheel/create", method = RequestMethod.POST)

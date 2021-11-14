@@ -36,9 +36,14 @@ public class CarController {
 
     @RequestMapping(value = "/api/car/delete/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteCar(@PathVariable long id) {
-        Optional<Car> car = carService.getByID(id);
-        carService.remove(id);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        try {
+            Optional<Car> car = carService.getByID(id);
+            carService.remove(id);
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println("id не найден");
+            return null;
+        }
     }
 
     @RequestMapping(value = "/api/car/create", method = RequestMethod.POST)
