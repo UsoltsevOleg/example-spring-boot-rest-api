@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springbootapp.repositories.CarRepository;
 import springbootapp.service.serviceimpl.CarServiceImpl;
 import springbootapp.entities.Car;
-import springbootapp.springboot.CarRepository;
 
 import java.util.Optional;
 

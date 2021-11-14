@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springbootapp.entities.Car;
+import springbootapp.entities.SteeringWheel;
 import springbootapp.repositories.SteeringWheelRepository;
 import springbootapp.service.SteeringWheelService;
 import springbootapp.service.serviceimpl.CarServiceImpl;
@@ -41,7 +42,7 @@ public class SteeringWheelController {
     }
 
     @RequestMapping(value = "/api/steeringWheel/create", method = RequestMethod.POST)
-    public ResponseEntity<?> createSteeringWheelService(@RequestBody SteeringWheelService steeringWheelService) {
+    public ResponseEntity<?> createSteeringWheelService(@RequestBody SteeringWheel steeringWheel) {
         return new ResponseEntity<>(steeringWheelService.save(steeringWheel), HttpStatus.CREATED);
     }
 }
