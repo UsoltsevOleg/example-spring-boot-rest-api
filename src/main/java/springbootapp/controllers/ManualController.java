@@ -25,7 +25,11 @@ public class ManualController {
     @RequestMapping(value = "/api/manual/read/{id}", method = RequestMethod.GET)
     public Optional<Manual> getManual(long id) {
         Optional<Manual> manual = manualService.getByID(id);
-        return manual;
+        if (manual != null) {
+            return new ResponseEntity<>(manualService.getByID(id), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(value = "/api/manual/update/{id}", method = RequestMethod.POST)

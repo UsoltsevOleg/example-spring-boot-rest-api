@@ -25,7 +25,11 @@ public class EngineController {
     @RequestMapping(value = "/api/engine/read/{id}", method = RequestMethod.GET)
     public Optional<Engine> getEngine(long id) {
         Optional<Engine> engine = engineService.getByID(id);
-        return engine;
+        if (engine != null) {
+            return new ResponseEntity<>(engineService.getByID(id), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(value = "/api/engine/update/{id}", method = RequestMethod.POST)

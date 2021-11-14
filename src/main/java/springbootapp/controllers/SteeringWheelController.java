@@ -1,15 +1,12 @@
 package springbootapp.controllers;
 
-import com.example.boot.starter.services.SomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springbootapp.entities.Car;
 import springbootapp.entities.SteeringWheel;
 import springbootapp.repositories.SteeringWheelRepository;
 import springbootapp.service.SteeringWheelService;
-import springbootapp.service.serviceimpl.CarServiceImpl;
 import springbootapp.service.serviceimpl.*;
 
 import java.util.Optional;
@@ -25,8 +22,12 @@ public class SteeringWheelController {
 
     @RequestMapping(value = "/api/steeringWheel/read/{id}", method = RequestMethod.GET)
     public Optional<SteeringWheelService> getSteeringWheelService(long id) {
-        Optional<SteeringWheelService> steeringWheel = steeringWheelService.getByID(id);
-        return steeringWheel;
+        Optional<SteeringWheel> steeringWheel = steeringWheelService.getByID(id);
+        if (steeringWheel != null) {
+            return new ResponseEntity<>(steeringWheelService.getByID(id), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(value = "/api/steeringWheel/update/{id}", method = RequestMethod.POST)

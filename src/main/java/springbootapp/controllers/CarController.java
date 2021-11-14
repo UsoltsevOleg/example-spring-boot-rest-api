@@ -22,7 +22,11 @@ public class CarController {
     @RequestMapping(value = "/api/car/read/{id}", method = RequestMethod.GET)
     public Optional<Car> getCar(long id) {
         Optional<Car> car = carService.getByID(id);
-        return car;
+        if (car != null) {
+            return new ResponseEntity<>(carService.getByID(id), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(value = "/api/car/update/{id}", method = RequestMethod.POST)

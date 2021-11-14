@@ -25,8 +25,12 @@ public class GearControllers {
 
     @RequestMapping(value = "/api/gear/read/{id}", method = RequestMethod.GET)
     public Optional<Gear> getGear(long id) {
-        Optional<Gear> gear = GearService.getByID(id);
-        return gear;
+        Optional<Gear> gear = gearService.getByID(id);
+        if (gear != null) {
+            return new ResponseEntity<>(gearService.getByID(id), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @RequestMapping(value = "/api/gear/update/{id}", method = RequestMethod.POST)
