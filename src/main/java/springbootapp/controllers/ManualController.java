@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springbootapp.entities.Car;
 import springbootapp.entities.Manual;
 import springbootapp.repositories.ManualRepository;
 import springbootapp.service.serviceimpl.ManualServiceImpl;
@@ -30,8 +31,10 @@ public class ManualController {
     }
 
     @RequestMapping(value = "/api/manual/update/{id}", method = RequestMethod.POST)
-    public ResponseEntity<?> updateManual(@RequestBody Manual manual) {
+    public ResponseEntity<?> updateManual(@RequestBody Long id) {
         try {
+            Optional<Manual> manual = manualService.getByID(id);
+            manual.setType("Book");
             return new ResponseEntity<>(manualService.update(manual), HttpStatus.UPGRADE_REQUIRED);
         } catch (Exception e) {
             System.out.println("id не найден");

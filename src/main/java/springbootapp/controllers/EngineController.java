@@ -30,8 +30,10 @@ public class EngineController {
     }
 
     @RequestMapping(value = "/api/engine/update/{id}", method = RequestMethod.POST)
-    public ResponseEntity<?> updateEngine(@RequestBody Engine engine) {
+    public ResponseEntity<?> updateEngine(@RequestBody Long id) {
         try {
+            Optional<Engine> engine = engineService.getByID(id);
+            engine.setType("Electric");
             return new ResponseEntity<>(engineService.update(engine), HttpStatus.UPGRADE_REQUIRED);
         } catch (Exception e) {
             System.out.println("id не найден");

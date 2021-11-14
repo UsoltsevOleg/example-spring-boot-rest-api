@@ -30,8 +30,10 @@ public class CarController {
     }
 
     @RequestMapping(value = "/api/car/update/{id}", method = RequestMethod.POST)
-    public ResponseEntity<?> updateCar(@RequestBody Car car) {
+    public ResponseEntity<?> updateCar(@RequestBody long id) {
         try {
+            Optional<Car> car = carService.getByID(id);
+            car.setManufacturerName("Lada");
             return new ResponseEntity<>(carService.update(car), HttpStatus.UPGRADE_REQUIRED);
         } catch (Exception e) {
             System.out.println("id не найден");
