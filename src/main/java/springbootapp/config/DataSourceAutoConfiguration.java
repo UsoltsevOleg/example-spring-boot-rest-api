@@ -15,11 +15,11 @@ public class DataSourceAutoConfiguration {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUsername("root");
-        dataSource.setPassword("mysql");
-        dataSource.setUrl(
-                "jdbc:mysql://172.18.0.2:3306/trainee?createDatabaseIfNotExist=true");
+        //dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        //dataSource.setUsername("root");
+        //dataSource.setPassword("mysql");
+        //dataSource.setUrl(
+          //      "jdbc:mysql://172.18.0.2:3306/trainee?createDatabaseIfNotExist=true");
 
         return dataSource;
     }
