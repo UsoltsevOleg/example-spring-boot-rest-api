@@ -10,5 +10,5 @@ public interface ManualService {
     Optional<Manual> getByID(long id);
     Manual update(Manual manual);
     void remove(long id);
-    Manual save(Manual car);
+    Manual save(Manual manual);
 }

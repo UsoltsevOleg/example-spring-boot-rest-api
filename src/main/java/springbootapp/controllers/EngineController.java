@@ -5,16 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springbootapp.entities.Engine;
-import springbootapp.repositories.EngineRepository;
 import springbootapp.service.serviceimpl.EngineServiceImpl;
 
 import java.util.Optional;
 
 @RestController
 public class EngineController {
-
-    @Autowired
-    private EngineRepository engineRepository;
 
     @Autowired
     private EngineServiceImpl engineService;

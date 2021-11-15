@@ -5,17 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springbootapp.entities.SteeringWheel;
-import springbootapp.repositories.SteeringWheelRepository;
 import springbootapp.service.SteeringWheelService;
-import springbootapp.service.serviceimpl.*;
+import springbootapp.service.serviceimpl.SteeringWheelServiceImpl;
 
 import java.util.Optional;
 
 @RestController
 public class SteeringWheelController {
-
-    @Autowired
-    private SteeringWheelRepository steeringWheelRepository;
 
     @Autowired
     private SteeringWheelServiceImpl steeringWheelService;

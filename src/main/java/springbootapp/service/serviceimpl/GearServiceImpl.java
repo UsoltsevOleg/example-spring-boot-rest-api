@@ -18,8 +18,7 @@ public class GearServiceImpl implements GearService {
     private GearRepository gearRepository;
 
     @Override
-    public Gear findGear(Gear car) {
-
+    public Gear findGear(Car car) {
         return gearRepository.findGearByEngineId(car.getEngine().getId());
     }
 

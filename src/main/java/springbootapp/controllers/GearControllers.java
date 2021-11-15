@@ -6,16 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springbootapp.entities.Car;
 import springbootapp.entities.Gear;
-import springbootapp.repositories.GearRepository;
 import springbootapp.service.serviceimpl.GearServiceImpl;
 
 import java.util.Optional;
 
 @RestController
 public class GearControllers {
-
-    @Autowired
-    private GearRepository gearRepository;
 
     @Autowired
     private GearServiceImpl gearService;
@@ -33,6 +29,7 @@ public class GearControllers {
     @RequestMapping(value = "/api/gear/update/{id}", method = RequestMethod.POST)
     public ResponseEntity<?> updateGear(@RequestBody long id) {
         try {
+            //Optional<Gear> gear = gearService.findGear(car);
             Optional<Gear> gear = gearService.getByID(id);
             gear.setGearSize(10);
             return new ResponseEntity<>(gearService.update(gear), HttpStatus.UPGRADE_REQUIRED);

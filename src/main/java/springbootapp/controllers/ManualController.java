@@ -4,18 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springbootapp.entities.Car;
 import springbootapp.entities.Manual;
-import springbootapp.repositories.ManualRepository;
 import springbootapp.service.serviceimpl.ManualServiceImpl;
 
 import java.util.Optional;
 
 @RestController
 public class ManualController {
-
-    @Autowired
-    private ManualRepository manualRepository;
 
     @Autowired
     private ManualServiceImpl manualService;
