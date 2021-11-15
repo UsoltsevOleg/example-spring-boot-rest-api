@@ -16,12 +16,12 @@ public class ManualController {
     private ManualServiceImpl manualService;
 
     @RequestMapping(value = "/api/manual/read/{id}", method = RequestMethod.GET)
-    public Optional<Manual> getManual(long id) {
+    public ResponseEntity<Optional<Manual>> getManual(long id) {
         Optional<Manual> manual = manualService.getByID(id);
         if (manual != null) {
-            return new ResponseEntity<>(manualService.getByID(id), HttpStatus.OK);
+            return new ResponseEntity<Optional<Manual>>(manualService.getByID(id), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Optional<Manual>>((Optional<Manual>) null, HttpStatus.NOT_FOUND);
         }
     }
 

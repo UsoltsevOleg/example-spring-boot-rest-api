@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springbootapp.entities.Car;
 import springbootapp.entities.Engine;
 import springbootapp.service.serviceimpl.EngineServiceImpl;
 
@@ -16,12 +17,12 @@ public class EngineController {
     private EngineServiceImpl engineService;
 
     @RequestMapping(value = "/api/engine/read/{id}", method = RequestMethod.GET)
-    public Optional<Engine> getEngine(long id) {
+    public ResponseEntity<Optional<Engine>> getEngine(long id) {
         Optional<Engine> engine = engineService.getByID(id);
         if (engine != null) {
-            return new ResponseEntity<>(engineService.getByID(id), HttpStatus.OK);
+            return new ResponseEntity<Optional<Engine>>(engineService.getByID(id), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Optional<Engine>>((Optional<Engine>)null, HttpStatus.NOT_FOUND);
         }
     }
 

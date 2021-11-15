@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springbootapp.entities.SteeringWheel;
-import springbootapp.service.SteeringWheelService;
 import springbootapp.service.serviceimpl.SteeringWheelServiceImpl;
 
 import java.util.Optional;
@@ -17,12 +16,12 @@ public class SteeringWheelController {
     private SteeringWheelServiceImpl steeringWheelService;
 
     @RequestMapping(value = "/api/steeringWheel/read/{id}", method = RequestMethod.GET)
-    public Optional<SteeringWheelService> getSteeringWheelService(long id) {
+    public ResponseEntity<Optional<SteeringWheel>> getSteeringWheelService(long id) {
         Optional<SteeringWheel> steeringWheel = steeringWheelService.getByID(id);
         if (steeringWheel != null) {
-            return new ResponseEntity<>(steeringWheelService.getByID(id), HttpStatus.OK);
+            return new ResponseEntity<Optional<SteeringWheel>>(steeringWheelService.getByID(id), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Optional<SteeringWheel>>((Optional<SteeringWheel>) null, HttpStatus.NOT_FOUND);
         }
     }
 

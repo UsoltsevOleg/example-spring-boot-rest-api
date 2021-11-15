@@ -16,12 +16,12 @@ public class CarController {
     private CarServiceImpl carService;
 
     @RequestMapping(value = "/api/car/read/{id}", method = RequestMethod.GET)
-    public Optional<Car> getCar(long id) {
+    public ResponseEntity<? extends Object> getCar(long id) {
         Optional<Car> car = carService.getByID(id);
         if (car != null) {
-            return new ResponseEntity<>(carService.getByID(id), HttpStatus.OK);
+            return new ResponseEntity<Optional<Car>>(carService.getByID(id), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Optional<Car>>((Optional<Car>) null, HttpStatus.NOT_FOUND);
         }
     }
 

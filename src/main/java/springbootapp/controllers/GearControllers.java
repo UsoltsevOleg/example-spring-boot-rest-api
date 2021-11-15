@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springbootapp.entities.Car;
 import springbootapp.entities.Gear;
 import springbootapp.service.serviceimpl.GearServiceImpl;
 
@@ -17,12 +16,12 @@ public class GearControllers {
     private GearServiceImpl gearService;
 
     @RequestMapping(value = "/api/gear/read/{id}", method = RequestMethod.GET)
-    public Optional<Gear> getGear(long id) {
+    public ResponseEntity<Optional<Gear>> getGear(long id) {
         Optional<Gear> gear = gearService.getByID(id);
         if (gear != null) {
-            return new ResponseEntity<>(gearService.getByID(id), HttpStatus.OK);
+            return new ResponseEntity<Optional<Gear>>(gearService.getByID(id), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Optional<Gear>>((Optional<Gear>) null, HttpStatus.NOT_FOUND);
         }
     }
 
