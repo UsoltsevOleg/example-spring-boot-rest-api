@@ -17,9 +17,9 @@ public class SteeringWheelController {
 
     @RequestMapping(value = "/api/steeringWheel/read/{id}", method = RequestMethod.GET)
     public ResponseEntity<Optional<SteeringWheel>> getSteeringWheelService(long id) {
-        Optional<SteeringWheel> steeringWheel = steeringWheelService.getByID(id);
+        Optional<SteeringWheel> steeringWheel = steeringWheelService.findByID(id);
         if (steeringWheel != null) {
-            return new ResponseEntity<Optional<SteeringWheel>>(steeringWheelService.getByID(id), HttpStatus.OK);
+            return new ResponseEntity<Optional<SteeringWheel>>(steeringWheelService.findByID(id), HttpStatus.OK);
         } else {
             return new ResponseEntity<Optional<SteeringWheel>>((Optional<SteeringWheel>) null, HttpStatus.NOT_FOUND);
         }
@@ -28,7 +28,8 @@ public class SteeringWheelController {
     @RequestMapping(value = "/api/steeringWheel/update/{id}", method = RequestMethod.POST)
     public ResponseEntity<?> updateSteeringWheelService(@RequestBody long id) {
         try {
-            Optional<SteeringWheel> steeringWheel = steeringWheelService.getByID(id);
+            //Optional<SteeringWheel> steeringWheel = steeringWheelService.findByID(id);
+            SteeringWheel steeringWheel = steeringWheelService.getByID(id);
             steeringWheel.setType("Sport");
             return new ResponseEntity<>(steeringWheelService.update(steeringWheel), HttpStatus.UPGRADE_REQUIRED);
         } catch (Exception e) {
@@ -40,7 +41,7 @@ public class SteeringWheelController {
     @RequestMapping(value = "/api/steeringWheel/delete/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteSteeringWheelService(@PathVariable long id) {
         try {
-            Optional<SteeringWheel> steeringWheel = steeringWheelService.getByID(id);
+            Optional<SteeringWheel> steeringWheel = steeringWheelService.findByID(id);
             steeringWheelService.remove(id);
             return new ResponseEntity<Void>(HttpStatus.OK);
         } catch (Exception e) {

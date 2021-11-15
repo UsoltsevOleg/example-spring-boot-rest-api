@@ -15,7 +15,7 @@ public class ManualServiceImpl implements ManualService {
     private ManualRepository manualRepository;
 
     @Override
-    public Optional<Manual> getByID(long id) {
+    public Optional<Manual> findByID(long id) {
         return manualRepository.findById(id);
     }
 
@@ -32,5 +32,10 @@ public class ManualServiceImpl implements ManualService {
     @Override
     public Manual save(Manual manual) {
         return manualRepository.save(manual);
+    }
+
+    @Override
+    public Manual getByID(long id) {
+        return manualRepository.getById(id);
     }
 }

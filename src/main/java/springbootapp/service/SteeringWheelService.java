@@ -7,8 +7,9 @@ import java.util.Optional;
 
 public interface SteeringWheelService {
 
-    Optional<SteeringWheel> getByID(long id);
+    Optional<SteeringWheel> findByID(long id);
     SteeringWheel update(SteeringWheel steeringWheel);
     void remove(long id);
     SteeringWheel save(SteeringWheel steeringWheel);
+    SteeringWheel getByID(long id);
 }

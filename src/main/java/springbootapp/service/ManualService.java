@@ -7,8 +7,9 @@ import java.util.Optional;
 
 public interface ManualService {
 
-    Optional<Manual> getByID(long id);
+    Optional<Manual> findByID(long id);
     Manual update(Manual manual);
     void remove(long id);
     Manual save(Manual manual);
+    Manual getByID(long id);
 }

@@ -40,7 +40,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Optional<Car> getByID(long id) {
+    public Optional<Car> findByID(long id) {
         return carRepository.findById(id);
     }
 
@@ -57,5 +57,10 @@ public class CarServiceImpl implements CarService {
     @Override
     public Car save(Car car) {
         return carRepository.save(car);
+    }
+
+    @Override
+    public Car getByID(long id) {
+        return carRepository.getById(id);
     }
 }

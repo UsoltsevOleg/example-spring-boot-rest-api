@@ -17,9 +17,9 @@ public class CarController {
 
     @RequestMapping(value = "/api/car/read/{id}", method = RequestMethod.GET)
     public ResponseEntity<? extends Object> getCar(long id) {
-        Optional<Car> car = carService.getByID(id);
+        Optional<Car> car = carService.findByID(id);
         if (car != null) {
-            return new ResponseEntity<Optional<Car>>(carService.getByID(id), HttpStatus.OK);
+            return new ResponseEntity<Optional<Car>>(carService.findByID(id), HttpStatus.OK);
         } else {
             return new ResponseEntity<Optional<Car>>((Optional<Car>) null, HttpStatus.NOT_FOUND);
         }
@@ -28,7 +28,8 @@ public class CarController {
     @RequestMapping(value = "/api/car/update/{id}", method = RequestMethod.POST)
     public ResponseEntity<?> updateCar(@RequestBody long id) {
         try {
-            Optional<Car> car = carService.getByID(id);
+            //Optional<Car> car = carService.findByID(id);
+            Car car = carService.getByID(id);
             car.setManufacturerName("Lada");
             return new ResponseEntity<>(carService.update(car), HttpStatus.UPGRADE_REQUIRED);
         } catch (Exception e) {
@@ -40,7 +41,7 @@ public class CarController {
     @RequestMapping(value = "/api/car/delete/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteCar(@PathVariable long id) {
         try {
-            Optional<Car> car = carService.getByID(id);
+            Optional<Car> car = carService.findByID(id);
             carService.remove(id);
             return new ResponseEntity<Void>(HttpStatus.OK);
         } catch (Exception e) {

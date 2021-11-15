@@ -17,9 +17,9 @@ public class ManualController {
 
     @RequestMapping(value = "/api/manual/read/{id}", method = RequestMethod.GET)
     public ResponseEntity<Optional<Manual>> getManual(long id) {
-        Optional<Manual> manual = manualService.getByID(id);
+        Optional<Manual> manual = manualService.findByID(id);
         if (manual != null) {
-            return new ResponseEntity<Optional<Manual>>(manualService.getByID(id), HttpStatus.OK);
+            return new ResponseEntity<Optional<Manual>>(manualService.findByID(id), HttpStatus.OK);
         } else {
             return new ResponseEntity<Optional<Manual>>((Optional<Manual>) null, HttpStatus.NOT_FOUND);
         }
@@ -28,7 +28,8 @@ public class ManualController {
     @RequestMapping(value = "/api/manual/update/{id}", method = RequestMethod.POST)
     public ResponseEntity<?> updateManual(@RequestBody Long id) {
         try {
-            Optional<Manual> manual = manualService.getByID(id);
+            //Optional<Manual> manual = manualService.findByID(id);
+            Manual manual = manualService.getByID(id);
             manual.setType("Book");
             return new ResponseEntity<>(manualService.update(manual), HttpStatus.UPGRADE_REQUIRED);
         } catch (Exception e) {
@@ -40,7 +41,7 @@ public class ManualController {
     @RequestMapping(value = "/api/manual/delete/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteManual(@PathVariable long id) {
         try {
-            Optional<Manual> manual = manualService.getByID(id);
+            Optional<Manual> manual = manualService.findByID(id);
             manualService.remove(id);
             return new ResponseEntity<Void>(HttpStatus.OK);
         } catch (Exception e) {

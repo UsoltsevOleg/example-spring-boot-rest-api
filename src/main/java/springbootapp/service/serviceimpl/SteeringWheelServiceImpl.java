@@ -15,7 +15,7 @@ public class SteeringWheelServiceImpl implements SteeringWheelService {
     private SteeringWheelRepository steeringWheelRepository;
 
     @Override
-    public Optional<SteeringWheel> getByID(long id) {
+    public Optional<SteeringWheel> findByID(long id) {
         return steeringWheelRepository.findById(id);
     }
 
@@ -32,5 +32,10 @@ public class SteeringWheelServiceImpl implements SteeringWheelService {
     @Override
     public SteeringWheel save(SteeringWheel steeringWheel) {
         return steeringWheelRepository.save(steeringWheel);
+    }
+
+    @Override
+    public SteeringWheel getByID(long id) {
+        return steeringWheelRepository.getById(id);
     }
 }

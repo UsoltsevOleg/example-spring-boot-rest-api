@@ -7,8 +7,9 @@ import java.util.Optional;
 
 public interface EngineService {
 
-    Optional<Engine> getByID(long id);
+    Optional<Engine> findByID(long id);
     Engine update(Engine engine);
     void remove(long id);
     Engine save(Engine engine);
+    Engine getByID(long id);
 }

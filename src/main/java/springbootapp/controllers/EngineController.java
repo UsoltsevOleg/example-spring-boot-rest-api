@@ -18,9 +18,9 @@ public class EngineController {
 
     @RequestMapping(value = "/api/engine/read/{id}", method = RequestMethod.GET)
     public ResponseEntity<Optional<Engine>> getEngine(long id) {
-        Optional<Engine> engine = engineService.getByID(id);
+        Optional<Engine> engine = engineService.findByID(id);
         if (engine != null) {
-            return new ResponseEntity<Optional<Engine>>(engineService.getByID(id), HttpStatus.OK);
+            return new ResponseEntity<Optional<Engine>>(engineService.findByID(id), HttpStatus.OK);
         } else {
             return new ResponseEntity<Optional<Engine>>((Optional<Engine>)null, HttpStatus.NOT_FOUND);
         }
@@ -29,7 +29,8 @@ public class EngineController {
     @RequestMapping(value = "/api/engine/update/{id}", method = RequestMethod.POST)
     public ResponseEntity<?> updateEngine(@RequestBody Long id) {
         try {
-            Optional<Engine> engine = engineService.getByID(id);
+            //Optional<Engine> engine = engineService.findByID(id);
+            Engine engine = engineService.getByID(id);
             engine.setType("Electric");
             return new ResponseEntity<>(engineService.update(engine), HttpStatus.UPGRADE_REQUIRED);
         } catch (Exception e) {
@@ -41,7 +42,7 @@ public class EngineController {
     @RequestMapping(value = "/api/engine/delete/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteEngine(@PathVariable long id) {
         try {
-            Optional<Engine> engine = engineService.getByID(id);
+            Optional<Engine> engine = engineService.findByID(id);
             engineService.remove(id);
             return new ResponseEntity<Void>(HttpStatus.OK);
         } catch (Exception e) {

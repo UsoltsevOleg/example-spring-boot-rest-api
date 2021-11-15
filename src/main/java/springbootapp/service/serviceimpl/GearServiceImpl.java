@@ -28,7 +28,7 @@ public class GearServiceImpl implements GearService {
     }
 
     @Override
-    public Optional<Gear> getByID(long id) {
+    public Optional<Gear> findByID(long id) {
         return gearRepository.findById(id);
     }
 
@@ -45,5 +45,10 @@ public class GearServiceImpl implements GearService {
     @Override
     public Gear save(Gear gear) {
         return gearRepository.save(gear);
+    }
+
+    @Override
+    public Gear getByID(long id) {
+        return gearRepository.getById(id);
     }
 }

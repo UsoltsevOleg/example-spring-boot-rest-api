@@ -17,9 +17,9 @@ public class GearControllers {
 
     @RequestMapping(value = "/api/gear/read/{id}", method = RequestMethod.GET)
     public ResponseEntity<Optional<Gear>> getGear(long id) {
-        Optional<Gear> gear = gearService.getByID(id);
+        Optional<Gear> gear = gearService.findByID(id);
         if (gear != null) {
-            return new ResponseEntity<Optional<Gear>>(gearService.getByID(id), HttpStatus.OK);
+            return new ResponseEntity<Optional<Gear>>(gearService.findByID(id), HttpStatus.OK);
         } else {
             return new ResponseEntity<Optional<Gear>>((Optional<Gear>) null, HttpStatus.NOT_FOUND);
         }
@@ -29,7 +29,7 @@ public class GearControllers {
     public ResponseEntity<?> updateGear(@RequestBody long id) {
         try {
             //Optional<Gear> gear = gearService.findGear(car);
-            Optional<Gear> gear = gearService.getByID(id);
+            Gear gear = gearService.getByID(id);
             gear.setGearSize(10);
             return new ResponseEntity<>(gearService.update(gear), HttpStatus.UPGRADE_REQUIRED);
         } catch (Exception e) {
@@ -41,7 +41,7 @@ public class GearControllers {
     @RequestMapping(value = "/api/gear/delete/{id}", method = RequestMethod.POST)
     public ResponseEntity<Void> deleteGear(@PathVariable long id) {
         try {
-            Optional<Gear> gear = gearService.getByID(id);
+            Optional<Gear> gear = gearService.findByID(id);
             gearService.remove(id);
             return new ResponseEntity<Void>(HttpStatus.OK);
         } catch (Exception e) {

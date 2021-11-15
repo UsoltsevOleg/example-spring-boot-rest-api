@@ -15,7 +15,7 @@ public class EngineServiceImpl implements EngineService {
     private EngineRepository engineRepository;
 
     @Override
-    public Optional<Engine> getByID(long id) {
+    public Optional<Engine> findByID(long id) {
         return engineRepository.findById(id);
     }
 
@@ -32,5 +32,10 @@ public class EngineServiceImpl implements EngineService {
     @Override
     public Engine save(Engine engine) {
         return engineRepository.save(engine);
+    }
+
+    @Override
+    public Engine getByID(long id) {
+        return engineRepository.getById(id);
     }
 }

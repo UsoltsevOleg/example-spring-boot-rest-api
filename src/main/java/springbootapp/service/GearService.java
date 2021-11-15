@@ -11,8 +11,9 @@ public interface GearService {
 
     Gear findGear(Car car);
     List<Gear> findGears(Car car);
-    Optional<Gear> getByID(long id);
+    Optional<Gear> findByID(long id);
     Gear update(Gear gear);
     void remove(long id);
     Gear save(Gear gear);
+    Gear getByID(long id);
 }
