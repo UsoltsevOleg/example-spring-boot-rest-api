@@ -19,9 +19,9 @@ public class ManualController {
     public ResponseEntity<Optional<Manual>> getManual(long id) {
         Optional<Manual> manual = manualService.findByID(id);
         if (manual != null) {
-            return new ResponseEntity<Optional<Manual>>(manualService.findByID(id), HttpStatus.OK);
+            return new ResponseEntity<>(manual, HttpStatus.OK);
         } else {
-            return new ResponseEntity<Optional<Manual>>((Optional<Manual>) null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

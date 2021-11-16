@@ -3,8 +3,10 @@ package springbootapp.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import springbootapp.entities.Car;
+import springbootapp.entities.Engine;
 import springbootapp.service.serviceimpl.CarServiceImpl;
 
 import java.util.Optional;
@@ -16,12 +18,12 @@ public class CarController {
     private CarServiceImpl carService;
 
     @RequestMapping(value = "/api/car/read/{id}", method = RequestMethod.GET)
-    public ResponseEntity<? extends Object> getCar(long id) {
+    public ResponseEntity<Optional<Car>> getCar(long id) {
         Optional<Car> car = carService.findByID(id);
         if (car != null) {
-            return new ResponseEntity<Optional<Car>>(carService.findByID(id), HttpStatus.OK);
+            return new ResponseEntity<>(car, HttpStatus.OK);
         } else {
-            return new ResponseEntity<Optional<Car>>((Optional<Car>) null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

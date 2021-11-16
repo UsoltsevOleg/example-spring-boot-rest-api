@@ -19,9 +19,9 @@ public class GearControllers {
     public ResponseEntity<Optional<Gear>> getGear(long id) {
         Optional<Gear> gear = gearService.findByID(id);
         if (gear != null) {
-            return new ResponseEntity<Optional<Gear>>(gearService.findByID(id), HttpStatus.OK);
+            return new ResponseEntity<>(gear, HttpStatus.OK);
         } else {
-            return new ResponseEntity<Optional<Gear>>((Optional<Gear>) null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

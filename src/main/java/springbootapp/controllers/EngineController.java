@@ -20,9 +20,9 @@ public class EngineController {
     public ResponseEntity<Optional<Engine>> getEngine(long id) {
         Optional<Engine> engine = engineService.findByID(id);
         if (engine != null) {
-            return new ResponseEntity<Optional<Engine>>(engineService.findByID(id), HttpStatus.OK);
+            return new ResponseEntity<>(engine, HttpStatus.OK);
         } else {
-            return new ResponseEntity<Optional<Engine>>((Optional<Engine>)null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

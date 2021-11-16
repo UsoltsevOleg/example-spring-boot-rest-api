@@ -19,9 +19,9 @@ public class SteeringWheelController {
     public ResponseEntity<Optional<SteeringWheel>> getSteeringWheelService(long id) {
         Optional<SteeringWheel> steeringWheel = steeringWheelService.findByID(id);
         if (steeringWheel != null) {
-            return new ResponseEntity<Optional<SteeringWheel>>(steeringWheelService.findByID(id), HttpStatus.OK);
+            return new ResponseEntity<>(steeringWheel, HttpStatus.OK);
         } else {
-            return new ResponseEntity<Optional<SteeringWheel>>((Optional<SteeringWheel>) null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
